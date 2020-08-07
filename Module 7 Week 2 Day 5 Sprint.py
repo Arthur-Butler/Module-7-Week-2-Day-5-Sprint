@@ -22,13 +22,13 @@ hashtag = "BLM"
 tweetamount=100
 #search input through api
 tweets = tweepy.Cursor(api.search,q=hashtag,lang="en",until="").items(tweetamount)
-alluserdata = [[tweet.user.screen_name, tweet.user.location, tweet.user.created_at] for tweet in tweets]
+alltweets = [[tweet.user.screen_name, tweet.user.location, tweet.user.created_at] for tweet in tweets]
 #exporting results to a json folder
 with open('twitter.json', 'w') as f:
     for tweet in tweepy.Cursor(api.search,q=hashtag,lang="en",until="").items(tweetamount):
         f.write(json.dumps(tweet._json)+"\n")
         print("Written to Json file")
-tweet_graph = pd.DataFrame(data = alluserdata,columns=['Tweeters', 'Location opf user','Time of tweet'])
+tweet_graph = pd.DataFrame(data = alltweets,columns=['Tweeters', 'Location opf user','Time of tweet'])
 #displaying results on graph
 tweet_graph.plot()
 plt.xlabel('Amount of tweets about topic')
