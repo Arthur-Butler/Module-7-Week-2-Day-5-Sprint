@@ -28,7 +28,7 @@ with open('twitter.json', 'w') as f:
     for tweet in tweepy.Cursor(api.search,q=hashtag,lang="en",until="").items(tweetamount):
         f.write(json.dumps(tweet._json)+"\n")
         print("Written to Json file")
-tweet_graph = pd.DataFrame(data = alltweets,columns=['Tweeters', 'Location opf user','Time of tweet'])
+tweet_graph = pd.DataFrame(data=alltweets)
 #displaying results on graph
 tweet_graph.plot()
 plt.xlabel('Amount of tweets about topic')
